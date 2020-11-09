@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-09T12:16:33.276Z</updated>
+  <updated>2020-11-09T13:56:16.358Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo更换theme使用 hexo s命令时出现问题</title>
+    <link href="http://example.com/2020/11/09/hexo-solve-1/"/>
+    <id>http://example.com/2020/11/09/hexo-solve-1/</id>
+    <published>2020-11-09T13:45:31.083Z</published>
+    <updated>2020-11-09T13:56:16.358Z</updated>
+    
+    <content type="html"><![CDATA[<p>hexo更换theme使用 hexo s命令时出现如图的问题：</p><p><img src="E:\blog\source\images\blogpic\4.png" alt="1"></p><h2 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h2><p>​    hexo在5.0之后把swig删除了</p><h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><p>​    在博客根目录下使用命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-swig</span><br></pre></td></tr></table></figure><p>​    安装过程如图：</p><p><img src="E:\blog\source\images\blogpic\5.png" alt="2"></p><p>​    安装完成后问题解决。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;hexo更换theme使用 hexo s命令时出现如图的问题：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;E:\blog\source\images\blogpic\4.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;原因：&quot;&gt;&lt;a href=&quot;#原因：&quot; class=&quot;hea</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>我的第一篇blog</title>
