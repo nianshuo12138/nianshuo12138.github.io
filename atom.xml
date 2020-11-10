@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>NianShu&#39;s blog</title>
+  <title>NianShuo&#39;s blog</title>
   
   <subtitle>可爱又迷人的反派角色</subtitle>
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-09T13:56:16.358Z</updated>
+  <updated>2020-11-10T02:14:52.478Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,24 +17,72 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>hexonext博客的首页归档关于按钮点击报错</title>
+    <link href="http://example.com/2020/11/10/hexonext%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%A6%96%E9%A1%B5%E5%BD%92%E6%A1%A3%E5%85%B3%E4%BA%8E%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E6%8A%A5%E9%94%99/"/>
+    <id>http://example.com/2020/11/10/hexonext%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%A6%96%E9%A1%B5%E5%BD%92%E6%A1%A3%E5%85%B3%E4%BA%8E%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E6%8A%A5%E9%94%99/</id>
+    <published>2020-11-10T01:55:09.000Z</published>
+    <updated>2020-11-10T02:14:52.478Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用hexo框架搭建博客，使用了next主题后，点击导航栏的按钮报错</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot GET &#x2F;%20</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="问题如图："><a href="#问题如图：" class="headerlink" title="问题如图："></a>问题如图：</h3><p>​    点击首页按钮后<img src="/2020/11/10/hexonext%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%A6%96%E9%A1%B5%E5%BD%92%E6%A1%A3%E5%85%B3%E4%BA%8E%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E6%8A%A5%E9%94%99/3.png" alt="3"></p><p>出现如下问题：</p><p><img src="/2020/11/10/hexonext%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%A6%96%E9%A1%B5%E5%BD%92%E6%A1%A3%E5%85%B3%E4%BA%8E%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E6%8A%A5%E9%94%99/1.png" alt="1"></p><p>​        多少有点烦人</p><h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>​        在<strong>主题配置文件</strong>，即blog/themes/next/文件夹下的_config.yml文件中使用CTRL + F查找menu字段，如图：</p><p><img src="/2020/11/10/hexonext%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%A6%96%E9%A1%B5%E5%BD%92%E6%A1%A3%E5%85%B3%E4%BA%8E%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E6%8A%A5%E9%94%99/2.png" alt="2"></p><p>把 home:/ || home</p><p>改为home:/|| home</p><p>即可，原因就是多了一个空格</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;使用hexo框架搭建博客，使用了next主题后，点击导航栏的按钮报错&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Cannot GET &amp;#x2F;%20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    
+    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    
+    <category term="乱码" scheme="http://example.com/tags/%E4%B9%B1%E7%A0%81/"/>
+    
+    <category term="按钮报错" scheme="http://example.com/tags/%E6%8C%89%E9%92%AE%E6%8A%A5%E9%94%99/"/>
+    
+    <category term="next" scheme="http://example.com/tags/next/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo上传博客时图片不显示问题</title>
+    <link href="http://example.com/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/"/>
+    <id>http://example.com/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/</id>
+    <published>2020-11-10T01:09:44.000Z</published>
+    <updated>2020-11-10T01:41:09.734Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>hexo上传博客时，发现图片只显示名字，图片则显示不出来</p><a id="more"></a><p>如图：</p><p><img src="/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/1.png" alt="1"> </p><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>   Hexo提供了一种更方便管理Asset的设定：post_asset_folder</p><ol><li><h4 id="站点配置"><a href="#站点配置" class="headerlink" title="站点配置"></a>站点配置</h4><ol><li>首先，在<strong>站点配置文件</strong>（即blog根目录下的_config.yml）中使用 CTRL + F中查找<strong>post__</strong>,改为<strong>true</strong>，如图：</li></ol><p><img src="/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/2.png" alt="2"></p></li><li><h4 id="安装-hexo-asset-image"><a href="#安装-hexo-asset-image" class="headerlink" title="安装 hexo-asset-image"></a>安装 hexo-asset-image</h4><p>在blog目录下执行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:&#x2F;&#x2F;github.com&#x2F;CodeFalling&#x2F;hexo-asset-image --save</span><br></pre></td></tr></table></figure><p>​    如图，忽略警告：</p><p><img src="/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/3.png" alt="3"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">   </span><br></pre></td></tr></table></figure><p>​    </p></li><li><h4 id="插入图片时的格式"><a href="#插入图片时的格式" class="headerlink" title="插入图片时的格式"></a>插入图片时的格式</h4><ol><li><p>安装完成后，使用hexo n命令新建博客会发现在blog/source/_posts文件夹下出现与博客同名的文件夹，即存放图片的文件夹，此博客的图片放到此文件夹即可，如图：</p><p>​    <img src="/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/4.png" alt="4"></p></li></ol><p>​            <img src="/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/5.png" alt="5"></p><p>​    在插入图片时格式为：[ ]中不写文字就没有标题</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](本地图片测试&#x2F;logo.jpg) </span><br></pre></td></tr></table></figure></li></ol><ol start="4"><li><h4 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h4><p>​    例如上传这张图片时我写的是</p></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![4](hexo上传博客时图片不显示问题&#x2F;4.png) </span><br></pre></td></tr></table></figure><p>​            在博客中就会显示</p><p>​                </p><p><img src="/2020/11/10/hexo%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E6%97%B6%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/6.png" alt="6"> </p><p>​        问题解决。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;问题：&quot;&gt;&lt;a href=&quot;#问题：&quot; class=&quot;headerlink&quot; title=&quot;问题：&quot;&gt;&lt;/a&gt;问题：&lt;/h3&gt;&lt;p&gt;hexo上传博客时，发现图片只显示名字，图片则显示不出来&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    
+    <category term="图片不显示" scheme="http://example.com/tags/%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>hexo更换theme使用 hexo s命令时出现问题</title>
-    <link href="http://example.com/2020/11/09/hexo-solve-1/"/>
-    <id>http://example.com/2020/11/09/hexo-solve-1/</id>
+    <link href="http://example.com/2020/11/09/hexo%E6%9B%B4%E6%8D%A2theme%E4%BD%BF%E7%94%A8hexos%E5%91%BD%E4%BB%A4%E6%97%B6%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98/"/>
+    <id>http://example.com/2020/11/09/hexo%E6%9B%B4%E6%8D%A2theme%E4%BD%BF%E7%94%A8hexos%E5%91%BD%E4%BB%A4%E6%97%B6%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98/</id>
     <published>2020-11-09T13:45:31.083Z</published>
-    <updated>2020-11-09T13:56:16.358Z</updated>
+    <updated>2020-11-10T01:47:29.582Z</updated>
     
-    <content type="html"><![CDATA[<p>hexo更换theme使用 hexo s命令时出现如图的问题：</p><p><img src="E:\blog\source\images\blogpic\4.png" alt="1"></p><h2 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h2><p>​    hexo在5.0之后把swig删除了</p><h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><p>​    在博客根目录下使用命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-swig</span><br></pre></td></tr></table></figure><p>​    安装过程如图：</p><p><img src="E:\blog\source\images\blogpic\5.png" alt="2"></p><p>​    安装完成后问题解决。</p>]]></content>
+    <content type="html"><![CDATA[<p>hexo更换theme使用 hexo s命令时出现乱码</p><a id="more"></a><p>如图的问题：</p><p><img src="/2020/11/09/hexo%E6%9B%B4%E6%8D%A2theme%E4%BD%BF%E7%94%A8hexos%E5%91%BD%E4%BB%A4%E6%97%B6%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98/1.png" alt="1"></p><h2 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h2><p>​    hexo在5.0之后把swig删除了</p><h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><p>​    在博客根目录下使用命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-swig</span><br></pre></td></tr></table></figure><p>​    安装过程如图：</p><p><img src="/2020/11/09/hexo%E6%9B%B4%E6%8D%A2theme%E4%BD%BF%E7%94%A8hexos%E5%91%BD%E4%BB%A4%E6%97%B6%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98/2.png" alt="2"></p><p>​    安装完成后问题解决。</p>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;p&gt;hexo更换theme使用 hexo s命令时出现如图的问题：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;E:\blog\source\images\blogpic\4.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;原因：&quot;&gt;&lt;a href=&quot;#原因：&quot; class=&quot;hea</summary>
-      
+    <summary type="html">&lt;p&gt;hexo更换theme使用 hexo s命令时出现乱码&lt;/p&gt;</summary>
     
     
     
+    
+    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    
+    <category term="乱码" scheme="http://example.com/tags/%E4%B9%B1%E7%A0%81/"/>
+    
+    <category term="swig" scheme="http://example.com/tags/swig/"/>
     
   </entry>
   
