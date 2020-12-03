@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-12-03T03:55:19.730Z</updated>
+  <updated>2020-12-03T05:15:54.762Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>找出指定文件夹路径下的所有文件及文件夹下所有子孙文件的后缀名</title>
+    <link href="http://example.com/2020/12/03/%E6%89%BE%E5%87%BA%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/"/>
+    <id>http://example.com/2020/12/03/%E6%89%BE%E5%87%BA%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/</id>
+    <published>2020-12-03T04:01:12.000Z</published>
+    <updated>2020-12-03T05:15:54.762Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="需求"><a href="#需求" class="headerlink" title="需求:"></a>需求:</h3><p>​    键盘录入一个文件夹路径，统计该文件夹下的各种后缀名的文件的个数,子文件夹下的也要统计.例如：.txt有10个，.java有30个……</p><a id="more"></a><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析:"></a>需求分析:</h3><p>​        由题分析,需要键盘录入,并判断是否是文件夹路径,定义HashMap方法,注意不要定义在递归函数中,会导致每次调用递归都会重新创建HashMap函数,要定义在类中方法外,并添加static关键字,还要注意在使用StringBuilder拼接字符串时其定义的位置,不要定义在递归内,可以独立出一个方法,也可以写在main方法中</p><h3 id="代码截图"><a href="#代码截图" class="headerlink" title="代码截图:"></a>代码截图:</h3><p><img src="/2020/12/03/%E6%89%BE%E5%87%BA%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/1.png" alt="1"></p><p><img src="/2020/12/03/%E6%89%BE%E5%87%BA%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/2.png" alt="2"></p><h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h3><p>​    注意:递归方法内尽量只包含递归,像使用StringBuilder拼接字符串时不要写在递归内,要不然咔咔报错误</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeWork03</span> </span>&#123;</span><br><span class="line"><span class="comment">// 注意HashMap的定义位置!若定义在方法体中,每次递归都会重新创建一个空的hashmap集合,导致统计不完全</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> HashMap&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">File file;</span><br><span class="line"><span class="comment">// 判断是否为文件夹路径</span></span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">String line = <span class="keyword">new</span> Scanner(System.in).nextLine();</span><br><span class="line">file = <span class="keyword">new</span> File(line);</span><br><span class="line"><span class="keyword">if</span> (file.isFile()) &#123;</span><br><span class="line"><span class="comment">//是文件,提示继续录入</span></span><br><span class="line">System.out.println(<span class="string">&quot;输出错误,请重新输入 : &quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">//是文件夹路径,退出循环</span></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">diGuiTongJi(file);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历,拼接</span></span><br><span class="line">Set&lt;String&gt; keys = map.keySet();</span><br><span class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="keyword">for</span> (String s : keys) &#123;</span><br><span class="line">sb.append(s).append(<span class="string">&quot;有&quot;</span>).append(map.get(s)).append(<span class="string">&quot;个,&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(sb.substring(<span class="number">0</span>, sb.length() - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">diGuiTongJi</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">File[] lf = file.listFiles();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (File ff : lf) &#123;</span><br><span class="line"><span class="keyword">if</span> (ff.isFile()) &#123;</span><br><span class="line"><span class="comment">// 获取文件名</span></span><br><span class="line">String fName = ff.getName();</span><br><span class="line"><span class="comment">//找到最右边的需要找的字符,返回索引</span></span><br><span class="line"><span class="keyword">int</span> lastHouZhui = fName.lastIndexOf(<span class="string">&quot;.&quot;</span>);</span><br><span class="line"><span class="comment">//因为有些系统文件没有后缀名,lastIndexOf()方法会返回-1,所以添加个判断</span></span><br><span class="line"><span class="keyword">if</span> (lastHouZhui != -<span class="number">1</span>) &#123;</span><br><span class="line">String ss = fName.substring(lastHouZhui);<span class="comment">//ss即为截取的文件后缀名</span></span><br><span class="line"><span class="comment">//if (map.containsKey(ss)) &#123;</span></span><br><span class="line"><span class="comment">//map.put(ss, map.get(ss) + 1);</span></span><br><span class="line"><span class="comment">//&#125; else &#123;</span></span><br><span class="line"><span class="comment">//map.put(ss, 1);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line">map.put(ss, map.containsKey(ss) ? map.get(ss) + <span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">diGuiTongJi(ff);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图:"></a>运行截图:</h3><p><img src="/2020/12/03/%E6%89%BE%E5%87%BA%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/3.png" alt="1"></p><p>完成.</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求:&quot;&gt;&lt;/a&gt;需求:&lt;/h3&gt;&lt;p&gt;​    键盘录入一个文件夹路径，统计该文件夹下的各种后缀名的文件的个数,子文件夹下的也要统计.例如：.txt有10个，.java有30个……&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Java" scheme="http://example.com/tags/Java/"/>
+    
+    <category term="Map" scheme="http://example.com/tags/Map/"/>
+    
+    <category term="递归" scheme="http://example.com/tags/%E9%80%92%E5%BD%92/"/>
+    
+    <category term="File" scheme="http://example.com/tags/File/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>指定文件夹路径下的所有文件及文件夹下所有子孙文件的后缀名</title>
+    <link href="http://example.com/2020/12/03/%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/"/>
+    <id>http://example.com/2020/12/03/%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/</id>
+    <published>2020-12-03T04:01:12.000Z</published>
+    <updated>2020-12-03T05:11:12.929Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="需求"><a href="#需求" class="headerlink" title="需求:"></a>需求:</h3><p>​    键盘录入一个文件夹路径，统计该文件夹下的各种后缀名的文件的个数,子文件夹下的也要统计.例如：.txt有10个，.java有30个……</p><a id="more"></a><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析:"></a>需求分析:</h3><p>​    由题分析,需要键盘录入,并判断是否是文件夹路径,定义HashMap方法,注意不要定义在递归函数中,会导致每次调用递归都会重新创建HashMap函数,要定义在类中方法外,并添加static关键字,还要注意在使用StringBuilder拼接字符串时其定义的位置,不要定义在递归内,可以独立出一个方法,也可以写在main方法中</p><h3 id="代码截图"><a href="#代码截图" class="headerlink" title="代码截图:"></a>代码截图:</h3><p><img src="/2020/12/03/%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/1.png" alt="1"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求:&quot;&gt;&lt;/a&gt;需求:&lt;/h3&gt;&lt;p&gt;​    键盘录入一个文件夹路径，统计该文件夹下的各种后缀名的文件的个数,子文件夹下的也要统计.例如：.txt有10个，.java有30个……&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Java" scheme="http://example.com/tags/Java/"/>
+    
+    <category term="Map" scheme="http://example.com/tags/Map/"/>
+    
+    <category term="递归" scheme="http://example.com/tags/%E9%80%92%E5%BD%92/"/>
+    
+    <category term="File" scheme="http://example.com/tags/File/"/>
+    
+  </entry>
   
   <entry>
     <title>统计字符串中出现的每个单词的个数并输出到文件里</title>
@@ -82,11 +132,11 @@
     
     <category term="hexo" scheme="http://example.com/tags/hexo/"/>
     
-    <category term="乱码" scheme="http://example.com/tags/%E4%B9%B1%E7%A0%81/"/>
-    
     <category term="按钮报错" scheme="http://example.com/tags/%E6%8C%89%E9%92%AE%E6%8A%A5%E9%94%99/"/>
     
     <category term="next" scheme="http://example.com/tags/next/"/>
+    
+    <category term="乱码" scheme="http://example.com/tags/%E4%B9%B1%E7%A0%81/"/>
     
   </entry>
   
