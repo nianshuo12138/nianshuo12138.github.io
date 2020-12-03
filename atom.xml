@@ -42,31 +42,6 @@
   </entry>
   
   <entry>
-    <title>指定文件夹路径下的所有文件及文件夹下所有子孙文件的后缀名</title>
-    <link href="http://example.com/2020/12/03/%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/"/>
-    <id>http://example.com/2020/12/03/%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/</id>
-    <published>2020-12-03T04:01:12.000Z</published>
-    <updated>2020-12-03T05:11:12.929Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="需求"><a href="#需求" class="headerlink" title="需求:"></a>需求:</h3><p>​    键盘录入一个文件夹路径，统计该文件夹下的各种后缀名的文件的个数,子文件夹下的也要统计.例如：.txt有10个，.java有30个……</p><a id="more"></a><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析:"></a>需求分析:</h3><p>​    由题分析,需要键盘录入,并判断是否是文件夹路径,定义HashMap方法,注意不要定义在递归函数中,会导致每次调用递归都会重新创建HashMap函数,要定义在类中方法外,并添加static关键字,还要注意在使用StringBuilder拼接字符串时其定义的位置,不要定义在递归内,可以独立出一个方法,也可以写在main方法中</p><h3 id="代码截图"><a href="#代码截图" class="headerlink" title="代码截图:"></a>代码截图:</h3><p><img src="/2020/12/03/%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%80%E6%9C%89%E5%AD%90%E5%AD%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8E%E7%BC%80%E5%90%8D/1.png" alt="1"></p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求:&quot;&gt;&lt;/a&gt;需求:&lt;/h3&gt;&lt;p&gt;​    键盘录入一个文件夹路径，统计该文件夹下的各种后缀名的文件的个数,子文件夹下的也要统计.例如：.txt有10个，.java有30个……&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
-    <category term="Map" scheme="http://example.com/tags/Map/"/>
-    
-    <category term="递归" scheme="http://example.com/tags/%E9%80%92%E5%BD%92/"/>
-    
-    <category term="File" scheme="http://example.com/tags/File/"/>
-    
-  </entry>
-  
-  <entry>
     <title>统计字符串中出现的每个单词的个数并输出到文件里</title>
     <link href="http://example.com/2020/12/03/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E4%B8%AA%E6%95%B0%E5%B9%B6%E8%BE%93%E5%87%BA%E5%88%B0%E6%96%87%E4%BB%B6%E9%87%8C/"/>
     <id>http://example.com/2020/12/03/%E7%BB%9F%E8%AE%A1%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AF%8F%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E4%B8%AA%E6%95%B0%E5%B9%B6%E8%BE%93%E5%87%BA%E5%88%B0%E6%96%87%E4%BB%B6%E9%87%8C/</id>
