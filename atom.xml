@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-12-04T08:29:10.523Z</updated>
+  <updated>2020-12-07T12:40:29.257Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SublimeText中输入法光标位置不对的解决办法</title>
+    <link href="http://example.com/2020/12/07/SublimeText%E4%B8%AD%E8%BE%93%E5%85%A5%E6%B3%95%E5%85%89%E6%A0%87%E4%BD%8D%E7%BD%AE%E4%B8%8D%E5%AF%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://example.com/2020/12/07/SublimeText%E4%B8%AD%E8%BE%93%E5%85%A5%E6%B3%95%E5%85%89%E6%A0%87%E4%BD%8D%E7%BD%AE%E4%B8%8D%E5%AF%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</id>
+    <published>2020-12-07T12:32:22.000Z</published>
+    <updated>2020-12-07T12:40:29.257Z</updated>
+    
+    <content type="html"><![CDATA[<p>在sublimeText3中使用中文输入法,发现输入法光标不是跳到屏幕左上角就是跳到屏幕左下角,烦死了,下面是解决办法:</p><a id="more"></a><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h3><p>1.安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IMESuppotr</span><br></pre></td></tr></table></figure><p>即可.</p><p>IMESupport在Github地址:<a href="https://github.com/chikatoike/IMESupport">https://github.com/chikatoike/IMESupport</a></p><p>下载地址: <a href="https://github.com/chikatoike/IMESupport/archive/master.zip">https://github.com/chikatoike/IMESupport/archive/master.zip</a></p><p>2.把下载好的ZIP文件解压到SublimeText安装目录下的</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Data\Packages</span><br></pre></td></tr></table></figure><p>路径下</p><p>3.重启sublimeText3,再次使用中文输入法打字,问题解决.</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;在sublimeText3中使用中文输入法,发现输入法光标不是跳到屏幕左上角就是跳到屏幕左下角,烦死了,下面是解决办法:&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="sublimeText" scheme="http://example.com/tags/sublimeText/"/>
+    
+    <category term="输入法" scheme="http://example.com/tags/%E8%BE%93%E5%85%A5%E6%B3%95/"/>
+    
+    <category term="光标" scheme="http://example.com/tags/%E5%85%89%E6%A0%87/"/>
+    
+  </entry>
   
   <entry>
     <title>eclipse的新建工作空间如何保留以前的配置</title>
