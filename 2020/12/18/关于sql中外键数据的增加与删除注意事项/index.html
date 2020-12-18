@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mysql,foreignkey,外键," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="NianShuo's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="外键约束 foreign key在添加了外键约束后添加和删除数据报错,分析是以下原因:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于sql中外键数据的增加与删除注意事项">
+<meta property="og:url" content="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
+<meta property="og:site_name" content="NianShuo&#39;s blog">
+<meta property="og:description" content="外键约束 foreign key在添加了外键约束后添加和删除数据报错,分析是以下原因:">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/1.png">
+<meta property="og:image" content="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/2.png">
+<meta property="og:image" content="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/3.png">
+<meta property="og:image" content="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/4.png">
+<meta property="og:image" content="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/5.png">
+<meta property="article:published_time" content="2020-12-18T08:25:00.000Z">
+<meta property="article:modified_time" content="2020-12-18T08:57:10.103Z">
+<meta property="article:author" content="Nian Shuo">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="foreignkey">
+<meta property="article:tag" content="外键">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/12/18/关于sql中外键数据的增加与删除注意事项/"/>
+
+
+
+
+
+  <title>关于sql中外键数据的增加与删除注意事项 | NianShuo's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NianShuo's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">可爱又迷人的反派角色</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NianShuo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于sql中外键数据的增加与删除注意事项</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-18T16:25:00+08:00">
+                2020-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="外键约束-foreign-key"><a href="#外键约束-foreign-key" class="headerlink" title="外键约束 foreign key"></a>外键约束 foreign key</h2><p>在添加了外键约束后添加和删除数据报错,分析是以下原因:</p>
+<a id="more"></a>
+
+<h3 id="1-外键的作用"><a href="#1-外键的作用" class="headerlink" title="1.外键的作用 :"></a>1.外键的作用 :</h3><p>​                进行多表数据关联</p>
+<p>​    小概念:</p>
+<p>​        主表:数据的提供方(一方的表)<br>​        从表:数据的引用方(多方的表)</p>
+<h3 id="2-外键的特点"><a href="#2-外键的特点" class="headerlink" title="2.外键的特点"></a>2.外键的特点</h3><p>​     (1)从表外键指向主表的主键<br>​     (2)从表外键的数据类型和长度, 必须和与主表的主键数据类型和长度一致</p>
+<h3 id="3-格式"><a href="#3-格式" class="headerlink" title="3.格式 :"></a>3.格式 :</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add constraint 外键名 foreign key(从表中外键字段名称) references 主表(主表的主键)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-代码准备"><a href="#4-代码准备" class="headerlink" title="4.代码准备"></a>4.代码准备</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE category(</span><br><span class="line">cid varchar(32) PRIMARY KEY,#主键ID</span><br><span class="line">cname VARCHAR(20)#分类名称</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">INSERT INTO category VALUES(&#39;c001&#39;,&#39;电脑办公&#39;);</span><br><span class="line">INSERT INTO category VALUES(&#39;c002&#39;,&#39;服装&#39;);</span><br><span class="line"></span><br><span class="line">#创建商品表：</span><br><span class="line">CREATE TABLE product(</span><br><span class="line">pid INT PRIMARY KEY,#主键ID</span><br><span class="line">pname VARCHAR(20),#商品名称</span><br><span class="line">price DOUBLE,#商品价格</span><br><span class="line">category_cid VARCHAR(32)#外键</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#导入数据</span><br><span class="line">INSERT INTO product(pid,pname,price,category_cid) VALUES(1,&#39;联想电脑&#39;,5000,&#39;c001&#39;);</span><br><span class="line">INSERT INTO product(pid,pname,price,category_cid) VALUES(2,&#39;海尔电脑&#39;,3000,&#39;c001&#39;);</span><br><span class="line">INSERT INTO product(pid,pname,price,category_cid) VALUES(3,&#39;雷神电脑&#39;,5000,&#39;c001&#39;);</span><br><span class="line"> </span><br><span class="line">INSERT INTO product(pid,pname,price,category_cid) VALUES(4,&#39;JACK JONES&#39;,800,&#39;c002&#39;);</span><br><span class="line">INSERT INTO product(pid,pname,price,category_cid) VALUES(5,&#39;真维斯&#39;,200,&#39;c002&#39;);</span><br><span class="line">INSERT INTO product(pid,pname,price,category_cid) VALUES(6,&#39;花花公子&#39;,440,&#39;c002&#39;);</span><br><span class="line">INSERT INTO product(pid,pname,price,category_cid) VALUES(7,&#39;劲霸&#39;,2000,&#39;c002&#39;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​    创建表完成,如图</p>
+<p>product表:</p>
+<p><img src="/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/1.png" alt="1"></p>
+<p>category表:</p>
+<p><img src="/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/2.png" alt="2"></p>
+<p>开始加入外键约束</p>
+<p>​        *一定要注意分清从表与主表的区别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table product add constraint fkid foreign key(category_cid) references category (cid);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-添加数据"><a href="#5-添加数据" class="headerlink" title="5.添加数据"></a>5.添加数据</h3><h5 id="添加数据应先添加一方的表-即主表"><a href="#添加数据应先添加一方的表-即主表" class="headerlink" title="添加数据应先添加一方的表,即主表"></a>添加数据应先添加<strong>一方</strong>的表,即<strong>主表</strong></h5><h4 id="1-错误示范"><a href="#1-错误示范" class="headerlink" title="(1)错误示范:"></a>(1)错误示范:</h4><p>​            先添加了从表数据,也就是多方表,出现报错</p>
+<p><img src="/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/3.png" alt="3"></p>
+<h4 id="2-错误原因"><a href="#2-错误原因" class="headerlink" title="(2)错误原因:"></a>(2)错误原因:</h4><p>​        在category表中,id字段没有c003,因为设置了外键索引,所以出现了报错,应该先在表中添加该字段,再到从表中添加数据.</p>
+<h3 id="6-删除数据"><a href="#6-删除数据" class="headerlink" title="6.删除数据"></a>6.删除数据</h3><h5 id="删除数据应该先删除多方的表-然后再删除一方的表-即先删除从表数据-再删除主表数据"><a href="#删除数据应该先删除多方的表-然后再删除一方的表-即先删除从表数据-再删除主表数据" class="headerlink" title="删除数据应该先删除多方的表,然后再删除一方的表;即先删除从表数据,再删除主表数据"></a>删除数据应该先删除多方的表,然后再删除一方的表;即先删除从表数据,再删除主表数据</h5><h4 id="1-错误示范-1"><a href="#1-错误示范-1" class="headerlink" title="(1)错误示范:"></a>(1)错误示范:</h4><p>​        先删除了主表数据,出表报错:</p>
+<p>​        <img src="/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/4.png" alt="4"></p>
+<p><img src="/2020/12/18/%E5%85%B3%E4%BA%8Esql%E4%B8%AD%E5%A4%96%E9%94%AE%E6%95%B0%E6%8D%AE%E7%9A%84%E5%A2%9E%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/5.png" alt="45"></p>
+<p>​    </p>
+<h4 id="2-错误原因-1"><a href="#2-错误原因-1" class="headerlink" title="(2)错误原因:"></a>(2)错误原因:</h4><p>​        在product表中,因为设置了外键索引,所以在category主表中删除索引时,索引还关联着从表的数据,所以出错,故应该先删除多方表的数据,再删除一方表中的数据.</p>
+
+      
+    </div>
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>	
+    
+    
+    
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，感谢您的支持~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+          
+            <a href="/tags/foreignkey/" rel="tag"><i class="fa fa-tag"></i> foreignkey</a>
+          
+            <a href="/tags/%E5%A4%96%E9%94%AE/" rel="tag"><i class="fa fa-tag"></i> 外键</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/07/SublimeText%E4%B8%AD%E8%BE%93%E5%85%A5%E6%B3%95%E5%85%89%E6%A0%87%E4%BD%8D%E7%BD%AE%E4%B8%8D%E5%AF%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" rel="next" title="SublimeText中输入法光标位置不对的解决办法">
+                <i class="fa fa-chevron-left"></i> SublimeText中输入法光标位置不对的解决办法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/nianshuo12138" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:594669833@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F-foreign-key"><span class="nav-number">1.</span> <span class="nav-text">外键约束 foreign key</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%96%E9%94%AE%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">1.外键的作用 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%96%E9%94%AE%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">2.外键的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3.格式 :</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BB%A3%E7%A0%81%E5%87%86%E5%A4%87"><span class="nav-number">1.4.</span> <span class="nav-text">4.代码准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.5.</span> <span class="nav-text">5.添加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE%E5%BA%94%E5%85%88%E6%B7%BB%E5%8A%A0%E4%B8%80%E6%96%B9%E7%9A%84%E8%A1%A8-%E5%8D%B3%E4%B8%BB%E8%A1%A8"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">添加数据应先添加一方的表,即主表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%94%99%E8%AF%AF%E7%A4%BA%E8%8C%83"><span class="nav-number">1.5.1.</span> <span class="nav-text">(1)错误示范:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%94%99%E8%AF%AF%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.5.2.</span> <span class="nav-text">(2)错误原因:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">1.6.</span> <span class="nav-text">6.删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%94%E8%AF%A5%E5%85%88%E5%88%A0%E9%99%A4%E5%A4%9A%E6%96%B9%E7%9A%84%E8%A1%A8-%E7%84%B6%E5%90%8E%E5%86%8D%E5%88%A0%E9%99%A4%E4%B8%80%E6%96%B9%E7%9A%84%E8%A1%A8-%E5%8D%B3%E5%85%88%E5%88%A0%E9%99%A4%E4%BB%8E%E8%A1%A8%E6%95%B0%E6%8D%AE-%E5%86%8D%E5%88%A0%E9%99%A4%E4%B8%BB%E8%A1%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">删除数据应该先删除多方的表,然后再删除一方的表;即先删除从表数据,再删除主表数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%94%99%E8%AF%AF%E7%A4%BA%E8%8C%83-1"><span class="nav-number">1.6.1.</span> <span class="nav-text">(1)错误示范:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%94%99%E8%AF%AF%E5%8E%9F%E5%9B%A0-1"><span class="nav-number">1.6.2.</span> <span class="nav-text">(2)错误原因:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-[object Object]"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nian Shuo</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
